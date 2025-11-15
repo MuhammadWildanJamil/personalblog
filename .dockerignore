@@ -1,0 +1,25 @@
+# --- Output dan Artifacts Build ---
+.next/             # Output build lokal, harus dibuat di dalam container
+build/             # Folder output build lain (jika ada)
+
+# --- Dependensi Node.js ---
+node_modules/      # Tidak perlu disalin dari host, harus diinstal di dalam container
+npm-debug.log* # Log dari npm
+yarn-error.log* # Log dari yarn
+yarn-debug.log*
+pnpm-debug.log* # Log dari pnpm
+
+# --- Konfigurasi Lokal dan Sensitif ---
+.env               # File environment variable lokal (SENSITIF)
+.env.* # Semua varian file environment variable
+
+# --- Versi Kontrol dan Konfigurasi IDE ---
+.git               # Metadata Git (tidak diperlukan untuk runtime)
+.github            # Konfigurasi GitHub Actions/workflows
+.vscode            # Pengaturan IDE VS Code
+.idea              # Pengaturan IDE JetBrains
+
+# --- Cache dan File Sementara ---
+tmp/
+temp/
+*.*.swp
