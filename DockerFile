@@ -1,55 +1,43 @@
 # ----------------------------------------------------
-# TAHAP 1: BUILDER (Membuat output Next.js yang optimal)
+# TAHAP 1: BUILDER
 # ----------------------------------------------------
 FROM node:20-slim AS builder
 
 WORKDIR /app
-
-# Salin package.json dan package-lock.json (untuk cache)
-COPY package.json package-lock.json ./
-
-# Instal dependensi (termasuk devDependencies untuk proses build)
+COPY package.json package-lock.json ./ 
 RUN npm install --legacy-peer-deps
-
 ARG CACHEBUST_V1=1
-
-# Salin seluruh kode proyek
 COPY . .
-
-# Lakukan Next.js Build
-# Perintah ini akan menghasilkan folder .next/standalone
 RUN npm run build
 
 
 # ----------------------------------------------------
-# TAHAP 2: RUNNER (Hanya komponen yang dibutuhkan saat runtime)
+# TAHAP 2: RUNNER (Node.js Standalone)
 # ----------------------------------------------------
 FROM node:20-slim AS runner
 
-# 1. Mengatur user non-root (Sangat disarankan untuk keamanan)
+# 1. User non-root
 RUN addgroup --gid 1001 nodejs
 RUN adduser --uid 1001 --ingroup nodejs --shell /bin/sh --disabled-password nodejs
 
-# 2. Salin output STANDALONE dari tahap builder (INI KRITIS)
+# 2. Salin output STANDALONE
 WORKDIR /app
 COPY --from=builder /app/public ./public
-# Output standalone diletakkan di root
+# 🚨 KOREKSI: Salin server.js dan folder yang dibutuhkan
 COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/package.json ./ 
 
-# 3. Salin node_modules produksi untuk runtime (jika diperlukan)
-# Catatan: Karena menggunakan output standalone, ini sering kali sudah teratasi, 
-# tetapi kadang dibutuhkan untuk symlink atau paket tertentu.
-# Jika ada node_modules yang dibutuhkan, salin node_modules produksi
-# COPY --from=builder /app/node_modules ./node_modules 
-
-# 4. Tetapkan PORT
+# 3. Tetapkan Lingkungan
 ENV PORT 3000
 ENV NODE_ENV production
+
+# 🚨 TAMBAHAN KRITIS: Memberi tahu server untuk mendengarkan di semua IP
+# Next.js 14+ sering membutuhkan host/hostname di set ke '0.0.0.0'
+ENV HOSTNAME 0.0.0.0 
+
 EXPOSE 3000
 
-# Ganti user ke non-root
 USER nodejs
 
 # Perintah untuk menjalankan aplikasi
-# Output standalone Next.js harus dijalankan melalui server.js yang dibuatnya.
 CMD ["node", "server.js"]
