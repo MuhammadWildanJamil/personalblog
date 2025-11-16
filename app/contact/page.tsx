@@ -15,7 +15,7 @@ const MY_PHONE = "+62 856-9106-3223";
 const MY_LOCATION = "DKI Jakarta, Indonesia";
 
 const navItems = [
-    { label: "Home", href: "/home" },
+    { label: "Home", href: "./" },
     { label: "About Me", href: "/about" },
     { label: "Template", href: "/template" },
     { label: "Contact", href: "/contact" },

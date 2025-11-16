@@ -27,7 +27,7 @@ import { motion, type Variants } from "framer-motion";
 // ------------------------------------
 
 const navItems = [
-  { label: "Home", href: "/home" },
+  { label: "Home", href: "./" },
   { label: "About Me", href: "/about" },
   { label: "Template", href: "/template" }, // Pastikan ini aktif
   { label: "Contact", href: "/contact" },

@@ -322,7 +322,7 @@ const TimelineItem: FC<TimelineItemProps> = ({
 };
 
 const navItems = [
-  { label: "Home", href: "/home" },
+  { label: "Home", href: "./" },
   { label: "About Me", href: "/" },
   { label: "Template", href: "/template" },
   { label: "Contact", href: "/contact" },
