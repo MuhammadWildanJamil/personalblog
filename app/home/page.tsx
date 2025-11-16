@@ -330,7 +330,7 @@ export default function Home() {
 
       <div className="w-full h-px bg-[#333]"></div> 
 
-      <div className="w-full bg-white py-20 px-4 sm:px-8 text-black border-t border-gray-200">
+      <div className="w-full bg-[#080808] py-16 px-4 sm:px-8 text-white border-t border-[#1a1a1a]">
             <div className="max-w-6xl mx-auto">
                 <h2 className="text-4xl sm:text-5xl font-extrabold mb-12 text-left">
                   Dokumentasi & Berita Acara
