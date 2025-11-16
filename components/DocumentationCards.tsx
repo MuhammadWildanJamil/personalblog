@@ -61,7 +61,7 @@ const DocumentationCards: React.FC<DocumentationCardsProps> = ({ documentation }
                 initial="hidden"
                 whileInView="visible" 
                 viewport={{ once: true, amount: 0.2 }}
-                whileHover={HOVER_EFFECT} 
+                whileHover={TAP_EFFECT} 
                 whileTap={TAP_EFFECT}
                 
                 className="flex flex-col p-0 rounded-xl border border-[#333] bg-[#1a1a1a] hover:bg-[#222] transition-colors duration-300 group overflow-hidden h-full"
