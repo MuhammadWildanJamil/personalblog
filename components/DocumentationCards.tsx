@@ -25,13 +25,7 @@ interface DocumentationCardsProps {
 const docCardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    hover: { 
-        y: -5, 
-        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)", 
-        scale: 1.01,
-        transition: { type: "spring", stiffness: 300, damping: 20 }
-    },
-    tap: { scale: 0.99 }
+    
 }
 
 
