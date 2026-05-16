@@ -405,7 +405,7 @@ export default function AboutPage() {
                 className="flex space-x-4 mt-8"
               >
                 <motion.a
-                  href="https://drive.google.com/file/d/1gle-tVELJS-ioUiwk_d8nZlwfmfcmaM8/view?usp=sharing" // Tautan CV yang sebenarnya
+                  href="./CV Wildan 2026.pdf" // Tautan CV yang sebenarnya
                   download
                   target="_blank"
                   rel="noopener noreferrer"
