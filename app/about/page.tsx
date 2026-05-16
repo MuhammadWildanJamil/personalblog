@@ -69,7 +69,7 @@ const TIMELINE_DATA = [
   {
     title: "IT Support",
     company: "Max Dental Center",
-    date: "December 2025 - Maret 2026",
+    date: "December 2025 - April 2026",
     description:
       "Mengelola Sistem Informasi Manajemen Klinik Untuk Pendaftaran, Rekam Medis Elektronik (EMR), dan Kasir."
   },
