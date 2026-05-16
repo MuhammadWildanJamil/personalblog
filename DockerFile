@@ -1,0 +1,43 @@
+# ----------------------------------------------------
+# TAHAP 1: BUILDER
+# ----------------------------------------------------
+FROM node:20-slim AS builder
+
+WORKDIR /app
+COPY package.json package-lock.json ./ 
+RUN npm install --legacy-peer-deps
+ARG CACHEBUST_V1=1
+COPY . .
+RUN npm run build
+
+
+# ----------------------------------------------------
+# TAHAP 2: RUNNER (Node.js Standalone)
+# ----------------------------------------------------
+FROM node:20-slim AS runner
+
+# 1. Mengatur user non-root (Kode ini sudah benar)
+RUN addgroup --gid 1001 nodejs
+RUN adduser --uid 1001 --ingroup nodejs --shell /bin/sh --disabled-password nodejs
+
+# 2. Salin output STANDALONE (Kode ini sudah benar)
+WORKDIR /app
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/package.json ./ 
+
+# 🚨 LANGKAH KRITIS: Ubah kepemilikan agar user 'nodejs' bisa menulis cache
+# Pastikan user 'nodejs' memiliki akses penuh ke folder kerja
+RUN chown -R nodejs:nodejs /app
+
+# 3. Tetapkan Lingkungan (Kode ini sudah benar)
+ENV PORT 3000
+ENV NODE_ENV production
+ENV HOSTNAME 0.0.0.0
+EXPOSE 3000
+
+# Ganti user ke non-root
+USER nodejs
+
+# Perintah untuk menjalankan aplikasi
+CMD ["node", "server.js"]
