@@ -67,6 +67,13 @@ const SKILLS = [
 
 const TIMELINE_DATA = [
   {
+    title: "IT Support",
+    company: "Max Dental Center",
+    date: "December 2025 - Maret 2026",
+    description:
+      "Mengelola Sistem Informasi Manajemen Klinik Untuk Pendaftaran, Rekam Medis Elektronik (EMR), dan Kasir."
+  },
+  {
     title: "Full-Stack Developer",
     company: "PT Era Panen Raya ( Era Matrix )",
     date: "April 2025 - Mei 2025",
@@ -623,7 +630,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Deployed on:{" "}
-                  <span className="font-semibold text-white">HomeServer</span>
+                  <span className="font-semibold text-white">Vercel</span>
                 </p>
               </div>
 
